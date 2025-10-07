@@ -370,7 +370,7 @@
                 left: 0;
                 background: rgba(0,0,0,0.95);
             }
-            
+
             .main-nav.active {
                 display: block; /* Показываем при клике */
             }
@@ -384,12 +384,12 @@
             .main-nav ul li {
                 margin: 0;
             }
-            
+
             .main-nav ul li a {
                 display: block;
                 padding: 15px 0;
             }
-            
+
             .menu-toggle {
                 display: block; /* Показываем иконку гамбургера */
             }
@@ -409,6 +409,18 @@
             .map-container {
                 height: 300px;
             }
+        }
+
+        /* --- Анимации при прокрутке --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -446,13 +458,13 @@
         <!-- О группе -->
         <section id="about">
             <div class="container">
-                <h2>Легенды Рейва</h2>
+                <h2 class="fade-in">Легенды Рейва</h2>
                 <div class="about-content">
-                    <div class="about-text">
+                    <div class="about-text fade-in">
                         <p>The Prodigy — британский музыкальный коллектив, образовавшийся в 1990 году и ориентированный на электронную музыку. Их музыка охватывает различные стили, начиная от рейва, хардкор-техно и индастриала в начале 1990-х годов и заканчивая брейкбитом с элементами панка в более позднее время.</p>
                         <p>Это не просто концерт, это погружение в атмосферу настоящего андеграунда, где каждый бит заставляет двигаться. Приготовьтесь к шквалу энергии, мощным басам и незабываемому световому шоу.</p>
                     </div>
-                    <div class="photo-gallery">
+                    <div class="photo-gallery fade-in">
                         <img src="1.tiff" alt="The Prodigy фото 1">
                         <img src="2.jpg" alt="The Prodigy фото 2">
                         <img src="3.tiff" alt="The Prodigy фото 3">
@@ -465,8 +477,8 @@
         <!-- Место проведения -->
         <section id="venue">
             <div class="container venue-content">
-                <h2>Live Arena</h2>
-                <div class="venue-details">
+                <h2 class="fade-in">Live Arena</h2>
+                <div class="venue-details fade-in">
                     <span class="date">28 Ноября 2025</span>
                     <span>Начало в 20:00</span>
                     <span>Самая мощная площадка столицы</span>
@@ -477,8 +489,8 @@
         <!-- Контакты -->
         <section id="contacts">
             <div class="container">
-                <h2>Как добраться</h2>
-                <div class="contacts-wrapper">
+                <h2 class="fade-in">Как добраться</h2>
+                <div class="contacts-wrapper fade-in">
                     <div class="contact-info">
                         <p><strong>Адрес:</strong></p>
                         <p>Московская область, Одинцовский городской округ, рабочий посёлок Новоивановское, улица Западная, 145.</p>
@@ -515,6 +527,21 @@
                     mainNav.classList.remove('active');
                 }
             });
+        });
+
+        // Анимации при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
     </script>
 
